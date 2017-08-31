@@ -1,0 +1,9 @@
+{% if latest_obra_list %}
+    <ul>
+    {% for obra in latest_obra_list %}
+        <li><a href="/polls/{{ obra.id }}/">{{ obra.nombre }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No obras are available.</p>
+{% endif %}
