@@ -1,0 +1,11 @@
+E:\SWAP\SGO\Producto\SGO\SGO\bin\Debug\netcoreapp2.0\SGO.deps.json
+E:\SWAP\SGO\Producto\SGO\SGO\bin\Debug\netcoreapp2.0\SGO.runtimeconfig.json
+E:\SWAP\SGO\Producto\SGO\SGO\bin\Debug\netcoreapp2.0\SGO.runtimeconfig.dev.json
+E:\SWAP\SGO\Producto\SGO\SGO\bin\Debug\netcoreapp2.0\SGO.dll
+E:\SWAP\SGO\Producto\SGO\SGO\bin\Debug\netcoreapp2.0\SGO.pdb
+E:\SWAP\SGO\Producto\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.csprojResolveAssemblyReference.cache
+E:\SWAP\SGO\Producto\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.csproj.CoreCompileInputs.cache
+E:\SWAP\SGO\Producto\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.AssemblyInfoInputs.cache
+E:\SWAP\SGO\Producto\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.AssemblyInfo.cs
+E:\SWAP\SGO\Producto\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.dll
+E:\SWAP\SGO\Producto\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.pdb
