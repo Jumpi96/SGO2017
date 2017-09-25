@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__EFMigrationsHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DetalleSubItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cantidad" Type="float" Nullable="false" />
+    <Property Name="ObraID" Type="int" />
+    <Property Name="PrecioUnitario" Type="float" Nullable="false" />
+    <Property Name="SubItemDeItemID" Type="int" />
+  </EntityType>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" />
+    <Property Name="SubRubroID" Type="int" />
+    <Property Name="UnidadID" Type="int" />
+  </EntityType>
+  <EntityType Name="Movimiento">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cantidad" Type="float" Nullable="false" />
+    <Property Name="Fecha" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="ModFecha" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="ModUsuarioID" Type="int" />
+    <Property Name="Observaciones" Type="nvarchar(max)" />
+    <Property Name="ReceptorID" Type="int" />
+    <Property Name="ObraID" Type="int" />
+    <Property Name="SubItemID" Type="int" />
+  </EntityType>
+  <EntityType Name="Obra">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cliente" Type="nvarchar(max)" />
+    <Property Name="Coeficiente" Type="float" Nullable="false" />
+    <Property Name="InsFecha" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="ModUsuarioID" Type="int" />
+    <Property Name="Nombre" Type="nvarchar(max)" />
+    <Property Name="Finalizada" Type="bit" Nullable="false" />
+    <Property Name="ModFecha" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Receptor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" />
+    <Property Name="Observaciones" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Rubro">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" />
+    <Property Name="Numeracion" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="SubItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" />
+    <Property Name="PrecioUnitario" Type="float" Nullable="false" />
+    <Property Name="TipoItemID" Type="int" />
+    <Property Name="UnidadID" Type="int" />
+  </EntityType>
+  <EntityType Name="SubItemDeItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemID" Type="int" />
+    <Property Name="SubItemID" Type="int" />
+  </EntityType>
+  <EntityType Name="SubRubro">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" />
+    <Property Name="RubroID" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TipoItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Caracter" Type="nvarchar(max)" />
+    <Property Name="Nombre" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Unidad">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" />
+    <Property Name="Nombre" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreUsuario" Type="nvarchar(max)" />
+    <Property Name="Password" Type="nvarchar(max)" />
+    <Property Name="Admin" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_DetalleSubItem_Obra_ObraID">
+    <End Role="Obra" Type="Self.Obra" Multiplicity="0..1" />
+    <End Role="DetalleSubItem" Type="Self.DetalleSubItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obra">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DetalleSubItem">
+        <PropertyRef Name="ObraID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleSubItem_SubItemDeItem_SubItemDeItemID">
+    <End Role="SubItemDeItem" Type="Self.SubItemDeItem" Multiplicity="0..1" />
+    <End Role="DetalleSubItem" Type="Self.DetalleSubItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubItemDeItem">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DetalleSubItem">
+        <PropertyRef Name="SubItemDeItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Item_SubRubro_SubRubroID">
+    <End Role="SubRubro" Type="Self.SubRubro" Multiplicity="0..1" />
+    <End Role="Item" Type="Self.Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubRubro">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="SubRubroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Item_Unidad_UnidadID">
+    <End Role="Unidad" Type="Self.Unidad" Multiplicity="0..1" />
+    <End Role="Item" Type="Self.Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unidad">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="UnidadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movimiento_Obra_ObraID">
+    <End Role="Obra" Type="Self.Obra" Multiplicity="0..1" />
+    <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obra">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Movimiento">
+        <PropertyRef Name="ObraID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movimiento_Receptor_ReceptorID">
+    <End Role="Receptor" Type="Self.Receptor" Multiplicity="0..1" />
+    <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Receptor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Movimiento">
+        <PropertyRef Name="ReceptorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movimiento_SubItem_SubItemID">
+    <End Role="SubItem" Type="Self.SubItem" Multiplicity="0..1" />
+    <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubItem">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Movimiento">
+        <PropertyRef Name="SubItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movimiento_Usuario_ModUsuarioID">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Movimiento">
+        <PropertyRef Name="ModUsuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Obra_Usuario_ModUsuarioID">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Obra" Type="Self.Obra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Obra">
+        <PropertyRef Name="ModUsuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubItem_TipoItem_TipoItemID">
+    <End Role="TipoItem" Type="Self.TipoItem" Multiplicity="0..1" />
+    <End Role="SubItem" Type="Self.SubItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoItem">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SubItem">
+        <PropertyRef Name="TipoItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubItem_Unidad_UnidadID">
+    <End Role="Unidad" Type="Self.Unidad" Multiplicity="0..1" />
+    <End Role="SubItem" Type="Self.SubItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unidad">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SubItem">
+        <PropertyRef Name="UnidadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubItemDeItem_Item_ItemID">
+    <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+    <End Role="SubItemDeItem" Type="Self.SubItemDeItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SubItemDeItem">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubItemDeItem_SubItem_SubItemID">
+    <End Role="SubItem" Type="Self.SubItem" Multiplicity="0..1" />
+    <End Role="SubItemDeItem" Type="Self.SubItemDeItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubItem">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SubItemDeItem">
+        <PropertyRef Name="SubItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubRubro_Rubro_RubroID">
+    <End Role="Rubro" Type="Self.Rubro" Multiplicity="0..1" />
+    <End Role="SubRubro" Type="Self.SubRubro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rubro">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SubRubro">
+        <PropertyRef Name="RubroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleSubItem" EntityType="Self.DetalleSubItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movimiento" EntityType="Self.Movimiento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Obra" EntityType="Self.Obra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Receptor" EntityType="Self.Receptor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rubro" EntityType="Self.Rubro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubItem" EntityType="Self.SubItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubItemDeItem" EntityType="Self.SubItemDeItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubRubro" EntityType="Self.SubRubro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoItem" EntityType="Self.TipoItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Unidad" EntityType="Self.Unidad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_DetalleSubItem_Obra_ObraID" Association="Self.FK_DetalleSubItem_Obra_ObraID">
+      <End Role="Obra" EntitySet="Obra" />
+      <End Role="DetalleSubItem" EntitySet="DetalleSubItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleSubItem_SubItemDeItem_SubItemDeItemID" Association="Self.FK_DetalleSubItem_SubItemDeItem_SubItemDeItemID">
+      <End Role="SubItemDeItem" EntitySet="SubItemDeItem" />
+      <End Role="DetalleSubItem" EntitySet="DetalleSubItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Item_SubRubro_SubRubroID" Association="Self.FK_Item_SubRubro_SubRubroID">
+      <End Role="SubRubro" EntitySet="SubRubro" />
+      <End Role="Item" EntitySet="Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Item_Unidad_UnidadID" Association="Self.FK_Item_Unidad_UnidadID">
+      <End Role="Unidad" EntitySet="Unidad" />
+      <End Role="Item" EntitySet="Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movimiento_Obra_ObraID" Association="Self.FK_Movimiento_Obra_ObraID">
+      <End Role="Obra" EntitySet="Obra" />
+      <End Role="Movimiento" EntitySet="Movimiento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movimiento_Receptor_ReceptorID" Association="Self.FK_Movimiento_Receptor_ReceptorID">
+      <End Role="Receptor" EntitySet="Receptor" />
+      <End Role="Movimiento" EntitySet="Movimiento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movimiento_SubItem_SubItemID" Association="Self.FK_Movimiento_SubItem_SubItemID">
+      <End Role="SubItem" EntitySet="SubItem" />
+      <End Role="Movimiento" EntitySet="Movimiento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movimiento_Usuario_ModUsuarioID" Association="Self.FK_Movimiento_Usuario_ModUsuarioID">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Movimiento" EntitySet="Movimiento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Obra_Usuario_ModUsuarioID" Association="Self.FK_Obra_Usuario_ModUsuarioID">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Obra" EntitySet="Obra" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubItem_TipoItem_TipoItemID" Association="Self.FK_SubItem_TipoItem_TipoItemID">
+      <End Role="TipoItem" EntitySet="TipoItem" />
+      <End Role="SubItem" EntitySet="SubItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubItem_Unidad_UnidadID" Association="Self.FK_SubItem_Unidad_UnidadID">
+      <End Role="Unidad" EntitySet="Unidad" />
+      <End Role="SubItem" EntitySet="SubItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubItemDeItem_Item_ItemID" Association="Self.FK_SubItemDeItem_Item_ItemID">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="SubItemDeItem" EntitySet="SubItemDeItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubItemDeItem_SubItem_SubItemID" Association="Self.FK_SubItemDeItem_SubItem_SubItemID">
+      <End Role="SubItem" EntitySet="SubItem" />
+      <End Role="SubItemDeItem" EntitySet="SubItemDeItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubRubro_Rubro_RubroID" Association="Self.FK_SubRubro_Rubro_RubroID">
+      <End Role="Rubro" EntitySet="Rubro" />
+      <End Role="SubRubro" EntitySet="SubRubro" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

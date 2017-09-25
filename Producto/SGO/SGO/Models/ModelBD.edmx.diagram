@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bcb7b1faa0b84f708597f007f2c27b8c" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.C__EFMigrationsHistory" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DetalleSubItem" Width="1.5" PointX="13.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Item" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Movimiento" Width="1.5" PointX="11.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Obra" Width="1.5" PointX="11.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Receptor" Width="1.5" PointX="9" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Rubro" Width="1.5" PointX="1.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SubItem" Width="1.5" PointX="6" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SubItemDeItem" Width="1.5" PointX="8.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SubRubro" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="3.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TipoItem" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Unidad" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Usuario" Width="1.5" PointX="9" PointY="9.625" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_DetalleSubItem_Obra_ObraID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_DetalleSubItem_SubItemDeItem_SubItemDeItemID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Item_SubRubro_SubRubroID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Item_Unidad_UnidadID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SubItemDeItem_Item_ItemID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Movimiento_Obra_ObraID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Movimiento_Receptor_ReceptorID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Movimiento_SubItem_SubItemID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Movimiento_Usuario_ModUsuarioID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Obra_Usuario_ModUsuarioID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SubRubro_Rubro_RubroID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SubItem_TipoItem_TipoItemID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SubItem_Unidad_UnidadID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SubItemDeItem_SubItem_SubItemID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
