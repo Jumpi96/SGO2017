@@ -1,4 +1,0 @@
--Usar .xls
-Install-Package ExcelDataReader
-Install-Package ExcelDataReader.DataSet
-Install-Package System.Text.Encoding.CodePages
