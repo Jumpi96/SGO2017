@@ -21,14 +21,22 @@ namespace SGO
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                      "~/Scripts/bootstrap-select.min.js",
+                      "~/Scripts/bootstrap-switch.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/dashboard.css",
                       "~/Content/fonts.css",
-                      "~/Content/sgo.css"));
+                      "~/Content/sgo.css",
+                      "~/Content/bootstrap-select.min.css",
+                      "~/Content/bootstrap-switch.min.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                      "~/Scripts/angular.js",
+                      "~/Scripts/app/obra-controllers.js"));
         }
     }
 }
