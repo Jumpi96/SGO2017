@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json.Serialization;
 using System.Web.Http;
 
 namespace SGO
@@ -10,6 +11,8 @@ namespace SGO
         public static void Register(HttpConfiguration config)
         {
             // Configuración y servicios de API web
+
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             // Rutas de API web
             config.MapHttpAttributeRoutes();

@@ -20,3 +20,9 @@ D:\Code\SGO\Producto\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.AssemblyInfoInputs.cach
 D:\Code\SGO\Producto\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.AssemblyInfo.cs
 D:\Code\SGO\Producto\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.dll
 D:\Code\SGO\Producto\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.pdb
+D:\Code\SGO\Proyecto\Version MVC puro\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.csprojResolveAssemblyReference.cache
+D:\Code\SGO\Proyecto\Version MVC puro\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.csproj.CoreCompileInputs.cache
+D:\Code\SGO\Proyecto\Version MVC puro\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.AssemblyInfoInputs.cache
+D:\Code\SGO\Proyecto\Version MVC puro\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.AssemblyInfo.cs
+D:\Code\SGO\Proyecto\Version MVC puro\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.dll
+D:\Code\SGO\Proyecto\Version MVC puro\SGO\SGO\obj\Debug\netcoreapp2.0\SGO.pdb

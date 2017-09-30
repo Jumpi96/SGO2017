@@ -13266,11 +13266,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "D:\\Code\\SGO\\Producto\\SGO\\SGO\\SGO.csproj",
+      "projectUniqueName": "D:\\Code\\SGO\\Proyecto\\Version MVC puro\\SGO\\SGO\\SGO.csproj",
       "projectName": "SGO",
-      "projectPath": "D:\\Code\\SGO\\Producto\\SGO\\SGO\\SGO.csproj",
+      "projectPath": "D:\\Code\\SGO\\Proyecto\\Version MVC puro\\SGO\\SGO\\SGO.csproj",
       "packagesPath": "C:\\Users\\juamp\\.nuget\\packages\\",
-      "outputPath": "D:\\Code\\SGO\\Producto\\SGO\\SGO\\obj\\",
+      "outputPath": "D:\\Code\\SGO\\Proyecto\\Version MVC puro\\SGO\\SGO\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

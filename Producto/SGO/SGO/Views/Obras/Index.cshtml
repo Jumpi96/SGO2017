@@ -1,0 +1,69 @@
+﻿@model IEnumerable<SGO.Models.Obra>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Coeficiente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InsFecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Finalizada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModFecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.NombreUsuario)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Coeficiente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InsFecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Finalizada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModFecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.NombreUsuario)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
