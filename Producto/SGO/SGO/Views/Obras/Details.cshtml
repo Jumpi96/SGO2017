@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Details";
 }
-<div id="bodyContainer" ng-app="SGOApp" ng-controller="ObraCtrl">
+<div id="bodyContainer" ng-app="SGOApp" ng-controller="ObraCtrl" ng-init="cargarInfoObra()">
     <div class="row" id="titulo-obra">
         <h3 class="col-md-8">@Html.DisplayFor(model => model.Nombre)</h3>
         <div class="btn-group col-md-4">
@@ -15,34 +15,40 @@
     <div class="row">
         <div class="dropdown col-md-3">
             <button class="btn btn-default dropdown-toggle" type="button" id="cmbRubro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Rubro
+                {{selectedRubro}}
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="cmbRubro">
-                <li><a href="#">Rubro 1</a></li>
+                <li ng-repeat="rubro in rubros"><a ng-click="seleccionarRubro(rubro)">{{rubro}}</a></li>
             </ul>
         </div>
         <div class="dropdown col-md-3">
             <button class="btn btn-default dropdown-toggle" type="button" id="cmbSubrubro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Subrubro
+                {{selectedSubrubro}}
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="cmbSubrubro">
-                <li><a href="#">Subrubro 1</a></li>
+                <li ng-repeat="subrubro in subrubros"><a ng-click="seleccionarSubrubro(subrubro)">{{subrubro}}</a></li>
             </ul>
         </div>
         <div class="dropdown col-md-3">
             <button class="btn btn-default dropdown-toggle" type="button" id="cmbItem" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Item
+                {{selectedItem}}
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="cmbItem">
-                <li><a href="#">Item 1</a></li>
+                <li ng-repeat="item in items"><a ng-click="seleccionarItem(item)">{{item}}</a></li>
             </ul>
         </div>
-        <select class="selectpicker" data-live-search="true">
-            <option>SubItem1</option>
-        </select>
+        <div class="dropdown col-md-3">
+            <button class="btn btn-default dropdown-togglen" type="button" id="cmbSubitem" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                {{selectedSubitem}}
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="cmbSubItem">
+                <li ng-repeat="subitem in subitems"><a ng-click="seleccionarSubitem(subitem)">{{subitem}}</a></li>
+            </ul>
+        </div>
     </div>
     <hr />
     <div class="row">
@@ -89,5 +95,4 @@
 @Scripts.Render("~/bundles/angular")
 @section scripts {
     @Scripts.Render("~/Scripts/obra-details.js")
-    @Scripts.Render("~/Scripts/Chart.bundle.min.js")
 }

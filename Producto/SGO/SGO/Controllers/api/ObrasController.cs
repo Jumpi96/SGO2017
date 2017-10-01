@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using SGO.Models;
+using SGO.Models.ViewModels;
 
 namespace SGO.Controllers.api
 {
@@ -33,6 +34,37 @@ namespace SGO.Controllers.api
             }
 
             return Ok(obra);
+        }
+
+        // GET: api/Obras/5/0/0/0/0
+        [ResponseType(typeof(ObraInfoViewModel))]
+        [Route("api/Obras/{id}/{rubro}/{subrubro}/{item}/{subitem}")]
+        public IHttpActionResult GetInfoObra(int id, int rubro, int subrubro, int item, int subitem)
+        {
+            Obra obra = db.Obra.Find(id);
+            if (obra == null)
+            {
+                return NotFound();
+            }
+
+            Dictionary<int,String> rubros = db.Rubro.ToDictionary(x => x.ID, x => x.Nombre);
+            Dictionary<int, String> subrubros = db.SubRubro.ToDictionary(x => x.ID, x => x.Nombre);
+            Dictionary<int, String> items = db.Item.ToDictionary(x => x.ID, x => x.Nombre);
+            Dictionary<int, String> subitems = db.SubItem.ToDictionary(x => x.ID, x => x.Nombre);
+
+            ObraInfoViewModel infoObra = new ObraInfoViewModel
+            {
+                rubros = rubros,
+                subrubros = subrubros,
+                items = items,
+                subitems = subitems,
+                aEntregar = "100 kg",
+                entregado = "110 kg",
+                movimientos = "2",
+                unidad = "l"
+            };
+
+            return Ok(infoObra);
         }
 
         // PUT: api/Obras/5
