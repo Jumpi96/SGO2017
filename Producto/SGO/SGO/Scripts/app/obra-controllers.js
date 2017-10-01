@@ -14,7 +14,7 @@
         $scope.selectedSubitem = "Subitem";
 
         $scope.cargarInfoObra = function () {
-            $http.get("/api/obras/9/0/0/0/0").then(function(response) {
+            $http.get("/api/obras/9/0/0/0/0/0").then(function(response) {
                 $scope.rubros = response.data.rubros;
                 $scope.subrubros = response.data.subrubros;
                 $scope.items = response.data.items;
