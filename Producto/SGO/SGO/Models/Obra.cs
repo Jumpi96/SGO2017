@@ -29,11 +29,15 @@ namespace SGO.Models
         public string Nombre { get; set; }
         public bool Finalizada { get; set; }
         public System.DateTime ModFecha { get; set; }
+        public Nullable<int> DepartamentoID { get; set; }
+        public Nullable<int> ClienteID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleSubItem> DetalleSubItem { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movimiento> Movimiento { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual Cliente Cliente1 { get; set; }
+        public virtual Departamento Departamento { get; set; }
     }
 }

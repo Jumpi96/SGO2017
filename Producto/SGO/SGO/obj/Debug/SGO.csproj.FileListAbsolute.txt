@@ -88,6 +88,7 @@ D:\Code\SGO\Producto\SGO\SGO\bin\System.Web.WebPages.dll
 D:\Code\SGO\Producto\SGO\SGO\bin\System.Web.WebPages.Razor.dll
 D:\Code\SGO\Producto\SGO\SGO\bin\WebGrease.dll
 D:\Code\SGO\Producto\SGO\SGO\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Code\SGO\Producto\SGO\SGO\bin\Newtonsoft.Json.xml
 D:\Code\SGO\Producto\SGO\SGO\bin\System.Web.Helpers.xml
 D:\Code\SGO\Producto\SGO\SGO\bin\System.Web.Mvc.xml
 D:\Code\SGO\Producto\SGO\SGO\bin\System.Web.Optimization.xml
@@ -96,7 +97,6 @@ D:\Code\SGO\Producto\SGO\SGO\bin\System.Web.WebPages.xml
 D:\Code\SGO\Producto\SGO\SGO\bin\System.Web.WebPages.Deployment.xml
 D:\Code\SGO\Producto\SGO\SGO\bin\System.Web.WebPages.Razor.xml
 D:\Code\SGO\Producto\SGO\SGO\bin\Antlr3.Runtime.pdb
-D:\Code\SGO\Producto\SGO\SGO\bin\Newtonsoft.Json.xml
 D:\Code\SGO\Producto\SGO\SGO\bin\System.Net.Http.Formatting.xml
 D:\Code\SGO\Producto\SGO\SGO\bin\System.Web.Http.xml
 D:\Code\SGO\Producto\SGO\SGO\bin\System.Web.Http.WebHost.xml

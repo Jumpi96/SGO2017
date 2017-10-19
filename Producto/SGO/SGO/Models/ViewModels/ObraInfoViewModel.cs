@@ -24,10 +24,10 @@ namespace SGO.Models.ViewModels
         public String unidad { get; set; }
 
         [JsonProperty(PropertyName = "entregado")]
-        public String entregado { get; set; }
+        public double entregado { get; set; }
 
         [JsonProperty(PropertyName = "aEntregar")]
-        public String aEntregar { get; set; }
+        public double aEntregar { get; set; }
 
         [JsonProperty(PropertyName = "movimientos")]
         public String movimientos { get; set; }

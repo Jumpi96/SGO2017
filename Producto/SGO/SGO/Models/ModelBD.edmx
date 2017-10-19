@@ -4,13 +4,33 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__EFMigrationsHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
           </Key>
           <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="40" />
+          <Property Name="Domicilio" Type="nvarchar" MaxLength="60" />
+          <Property Name="TelFijo" Type="nvarchar" MaxLength="20" />
+          <Property Name="TelCel" Type="nvarchar" MaxLength="20" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="20" />
+          <Property Name="TipoClienteID" Type="int" />
+          <Property Name="ModUsuarioID" Type="int" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="DetalleSubItem">
           <Key>
@@ -56,6 +76,8 @@
           <Property Name="ModUsuarioID" Type="int" />
           <Property Name="Nombre" Type="nvarchar(max)" />
           <Property Name="Finalizada" Type="bit" Nullable="false" />
+          <Property Name="DepartamentoID" Type="int" />
+          <Property Name="ClienteID" Type="int" />
           <Property Name="ModFecha" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="Receptor">
@@ -110,6 +132,13 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="TipoCliente">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="40" />
+        </EntityType>
         <EntityType Name="TipoItem">
           <Key>
             <PropertyRef Name="ID" />
@@ -135,6 +164,18 @@
           <Property Name="Password" Type="nvarchar(max)" />
           <Property Name="Admin" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Cliente_TipoCliente">
+          <End Role="TipoCliente" Type="Self.TipoCliente" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCliente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="TipoClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DetalleSubItem_Obra_ObraID">
           <End Role="Obra" Type="Self.Obra" Multiplicity="0..1" />
           <End Role="DetalleSubItem" Type="Self.DetalleSubItem" Multiplicity="*" />
@@ -231,6 +272,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Obra_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Obra" Type="Self.Obra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Obra">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obra_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Obra" Type="Self.Obra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Obra">
+              <PropertyRef Name="DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Obra_Usuario_ModUsuarioID">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Obra" Type="Self.Obra" Multiplicity="*" />
@@ -305,6 +370,8 @@
         </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleSubItem" EntityType="Self.DetalleSubItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movimiento" EntityType="Self.Movimiento" Schema="dbo" store:Type="Tables" />
@@ -315,9 +382,14 @@
           <EntitySet Name="SubItemDeItem" EntityType="Self.SubItemDeItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubRubro" EntityType="Self.SubRubro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCliente" EntityType="Self.TipoCliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoItem" EntityType="Self.TipoItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Unidad" EntityType="Self.Unidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cliente_TipoCliente" Association="Self.FK_Cliente_TipoCliente">
+            <End Role="TipoCliente" EntitySet="TipoCliente" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
           <AssociationSet Name="FK_DetalleSubItem_Obra_ObraID" Association="Self.FK_DetalleSubItem_Obra_ObraID">
             <End Role="Obra" EntitySet="Obra" />
             <End Role="DetalleSubItem" EntitySet="DetalleSubItem" />
@@ -350,6 +422,14 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Movimiento" EntitySet="Movimiento" />
           </AssociationSet>
+          <AssociationSet Name="FK_Obra_Cliente" Association="Self.FK_Obra_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Obra" EntitySet="Obra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obra_Departamento" Association="Self.FK_Obra_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Obra" EntitySet="Obra" />
+          </AssociationSet>
           <AssociationSet Name="FK_Obra_Usuario_ModUsuarioID" Association="Self.FK_Obra_Usuario_ModUsuarioID">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Obra" EntitySet="Obra" />
@@ -375,8 +455,7 @@
             <End Role="SubRubro" EntitySet="SubRubro" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -444,6 +523,10 @@
           <NavigationProperty Name="DetalleSubItem" Relationship="Self.FK_DetalleSubItem_Obra_ObraID" FromRole="Obra" ToRole="DetalleSubItem" />
           <NavigationProperty Name="Movimiento" Relationship="Self.FK_Movimiento_Obra_ObraID" FromRole="Obra" ToRole="Movimiento" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Obra_Usuario_ModUsuarioID" FromRole="Obra" ToRole="Usuario" />
+          <Property Name="DepartamentoID" Type="Int32" />
+          <Property Name="ClienteID" Type="Int32" />
+          <NavigationProperty Name="Cliente1" Relationship="Model.FK_Obra_Cliente" FromRole="Obra" ToRole="Cliente" />
+          <NavigationProperty Name="Departamento" Relationship="Model.FK_Obra_Departamento" FromRole="Obra" ToRole="Departamento" />
         </EntityType>
         <EntityType Name="Receptor">
           <Key>
@@ -777,7 +860,89 @@
             <End Role="SubItem" EntitySet="SubItem" />
             <End Role="SubItemDeItem" EntitySet="SubItemDeItem" />
           </AssociationSet>
+          <EntitySet Name="Cliente" EntityType="Model.Cliente" />
+          <EntitySet Name="Departamento" EntityType="Model.Departamento" />
+          <EntitySet Name="TipoCliente" EntityType="Model.TipoCliente" />
+          <AssociationSet Name="FK_Cliente_TipoCliente" Association="Model.FK_Cliente_TipoCliente">
+            <End Role="TipoCliente" EntitySet="TipoCliente" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obra_Cliente" Association="Model.FK_Obra_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Obra" EntitySet="Obra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obra_Departamento" Association="Model.FK_Obra_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Obra" EntitySet="Obra" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Domicilio" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="TelFijo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TelCel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Correo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TipoClienteID" Type="Int32" />
+          <Property Name="ModUsuarioID" Type="Int32" />
+          <NavigationProperty Name="TipoCliente" Relationship="Model.FK_Cliente_TipoCliente" FromRole="Cliente" ToRole="TipoCliente" />
+          <NavigationProperty Name="Obra" Relationship="Model.FK_Obra_Cliente" FromRole="Cliente" ToRole="Obra" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Obra" Relationship="Model.FK_Obra_Departamento" FromRole="Departamento" ToRole="Obra" />
+        </EntityType>
+        <EntityType Name="TipoCliente">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cliente" Relationship="Model.FK_Cliente_TipoCliente" FromRole="TipoCliente" ToRole="Cliente" />
+        </EntityType>
+        <Association Name="FK_Cliente_TipoCliente">
+          <End Type="Model.TipoCliente" Role="TipoCliente" Multiplicity="0..1" />
+          <End Type="Model.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCliente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="TipoClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obra_Cliente">
+          <End Type="Model.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="Model.Obra" Role="Obra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Obra">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obra_Departamento">
+          <End Type="Model.Departamento" Role="Departamento" Multiplicity="0..1" />
+          <End Type="Model.Obra" Role="Obra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Obra">
+              <PropertyRef Name="DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -831,6 +996,8 @@
           <EntitySetMapping Name="Obra">
             <EntityTypeMapping TypeName="Model.Obra">
               <MappingFragment StoreEntitySet="Obra">
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="DepartamentoID" ColumnName="DepartamentoID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Cliente" ColumnName="Cliente" />
                 <ScalarProperty Name="Coeficiente" ColumnName="Coeficiente" />
@@ -925,6 +1092,36 @@
                 <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Admin" ColumnName="Admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="Model.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="ModUsuarioID" ColumnName="ModUsuarioID" />
+                <ScalarProperty Name="TipoClienteID" ColumnName="TipoClienteID" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="TelCel" ColumnName="TelCel" />
+                <ScalarProperty Name="TelFijo" ColumnName="TelFijo" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamento">
+            <EntityTypeMapping TypeName="Model.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCliente">
+            <EntityTypeMapping TypeName="Model.TipoCliente">
+              <MappingFragment StoreEntitySet="TipoCliente">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

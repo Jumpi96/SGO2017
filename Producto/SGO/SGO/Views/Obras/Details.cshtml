@@ -3,11 +3,11 @@
 @{
     ViewBag.Title = "Details";
 }
-<div id="bodyContainer" ng-app="SGOApp" ng-controller="ObraCtrl" ng-init="cargarInfoObra()">
+<div id="bodyContainer" ng-app="SGOApp" ng-controller="ObraCtrl" ng-init="cargarInfoObra(@Html.ValueFor(model => model.ID))">
     <div class="row" id="titulo-obra">
         <h3 class="col-md-8">@Html.DisplayFor(model => model.Nombre)</h3>
         <div class="btn-group col-md-4">
-            <button ng-click="limpiarFiltros()" class="btn btn-warning col-md-6">Limpiar filtros</button>
+            <button ng-click="cargarInfoObra(@Html.ValueFor(model => model.ID))" class="btn btn-warning col-md-6">Limpiar filtros</button>
             <button class="btn btn-warning col-md-6">Modificar obra</button>
         </div>
     </div>
@@ -54,15 +54,17 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-4">
-            <input type="checkbox" name="my-checkbox" checked>
+            <input type="checkbox" name="chkUnidad" ng-checked="selectedEnPesos" checked="true">
         </div>
         <div class="col-md-2"></div>
         <button class="btn btn-danger col-md-2">Registrar pago</button>
     </div>
     <hr />
     <div class="row">
-        <div class="col-md-6">
-            <canvas id="myChart" width="400" height="400"></canvas>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <div class="graficoBarras" ng-show="entregadoGrafico>=aEntregarGrafico"></div>
+            <div id="graficoTorta" ng-show="entregadoGrafico<aEntregarGrafico"></div>
         </div>
         <div class="col-md-6">
             <dl class="dl-horizontal">
@@ -96,3 +98,4 @@
 @section scripts {
     @Scripts.Render("~/Scripts/obra-details.js")
 }
+<script src="https://d3js.org/d3.v4.min.js"></script>

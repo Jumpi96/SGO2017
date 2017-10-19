@@ -39,5 +39,8 @@ namespace SGO.Models
         public virtual DbSet<TipoItem> TipoItem { get; set; }
         public virtual DbSet<Unidad> Unidad { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<Departamento> Departamento { get; set; }
+        public virtual DbSet<TipoCliente> TipoCliente { get; set; }
     }
 }

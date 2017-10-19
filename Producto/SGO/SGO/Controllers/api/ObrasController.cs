@@ -36,9 +36,9 @@ namespace SGO.Controllers.api
             return Ok(obra);
         }
 
-        // GET: api/Obras/5/0/0/0/0
+        // GET: api/Obras/5/0/0/0/0/0
         [ResponseType(typeof(ObraInfoViewModel))]
-        [Route("api/Obras/{id}/{rubro}/{subrubro}/{item}/{subitem}/{unidad}")]
+        [Route("api/Obras/{id}/{rubro}/{subrubro}/{item}/{subitem}/{enPesos}")]
         public IHttpActionResult GetInfoObra(int id, int rubro, int subrubro, int item, int subitem, int enPesos)
         {
             Obra obra = db.Obra.Find(id);
@@ -51,10 +51,10 @@ namespace SGO.Controllers.api
             Dictionary<int, String> subrubros = db.SubRubro.ToDictionary(x => x.ID, x => x.Nombre);
             Dictionary<int, String> items = db.Item.ToDictionary(x => x.ID, x => x.Nombre);
             Dictionary<int, String> subitems = db.SubItem.ToDictionary(x => x.ID, x => x.Nombre);
-            String aEntregar = GetAEntregar(id, rubro, subrubro, item, subitem, enPesos==1);
-            String entregado = GetEntregado(id, rubro, subrubro, item, subitem, enPesos == 1);
+            double aEntregar = GetAEntregar(id, rubro, subrubro, item, subitem, enPesos==1);
+            double entregado = GetEntregado(id, rubro, subrubro, item, subitem, enPesos == 1);
             String movimientos = GetMovimientos(id, rubro, subrubro, item, subitem, enPesos == 1).ToString();
-            String unidad = enPesos==1 ? "$" : GetUnidad(subitem);
+            String unidad = enPesos == 1 ? "$" : GetUnidad(subitem);
 
             ObraInfoViewModel infoObra = new ObraInfoViewModel
             {
@@ -155,7 +155,7 @@ namespace SGO.Controllers.api
          * Devuelve cantidad de un token que se debe entregar en la obra, en una unidad determinada o en $.
          * Token: un subitem, los subitems de un item, todos los subitems de una obra, etc.
         */
-        private String GetAEntregar(int obra, int rubro, int subrubro, int item, int subitem, bool enPesos)
+        private double GetAEntregar(int obra, int rubro, int subrubro, int item, int subitem, bool enPesos)
         {
             var query =
                     from DS in db.DetalleSubItem
@@ -177,11 +177,11 @@ namespace SGO.Controllers.api
                 sumatoria = detallesSubItem.Sum(d => d.Cantidad);
             }
 
-            return sumatoria.ToString("N2");
+            return sumatoria;
         }
 
         //Devuelve cantidad de un token entregado en la obra, en una unidad determinada o en $.
-        private String GetEntregado(int obra, int rubro, int subrubro, int item, int subitem, bool enPesos)
+        private double GetEntregado(int obra, int rubro, int subrubro, int item, int subitem, bool enPesos)
         {
             var queryM =
                 from M in db.Movimiento
@@ -198,7 +198,6 @@ namespace SGO.Controllers.api
             {
                 sumatoria = movimientos.Sum(m => m.Cantidad *
                                             (from DS in db.DetalleSubItem
-                                                 //join SI in db.SubItemDeItem on DS.SubItemDeItemID equals 
                                              where m.SubItemID == DS.SubItemDeItem.SubItemID
                                              orderby DS.PrecioUnitario descending
                                              select DS.PrecioUnitario).First());
@@ -208,7 +207,7 @@ namespace SGO.Controllers.api
                 sumatoria = movimientos.Sum(m => m.Cantidad);
             }
 
-            return sumatoria.ToString("N2");
+            return sumatoria;
         }
 
         //Devuelve cantidad de entregas en la obra.

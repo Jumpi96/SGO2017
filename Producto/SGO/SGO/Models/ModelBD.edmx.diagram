@@ -33,6 +33,12 @@
         <AssociationConnector Association="Model.FK_SubItem_TipoItem_TipoItemID" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_SubItem_Unidad_UnidadID" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_SubItemDeItem_SubItem_SubItemID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.Cliente" Width="1.5" PointX="3" PointY="11" />
+        <EntityTypeShape EntityType="Model.Departamento" Width="1.5" PointX="9.375" PointY="7.25" />
+        <EntityTypeShape EntityType="Model.TipoCliente" Width="1.5" PointX="0.75" PointY="11.625" />
+        <AssociationConnector Association="Model.FK_Cliente_TipoCliente" />
+        <AssociationConnector Association="Model.FK_Obra_Cliente" />
+        <AssociationConnector Association="Model.FK_Obra_Departamento" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
