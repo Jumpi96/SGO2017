@@ -17,7 +17,7 @@ namespace SGO.Controllers
         // GET: Obras
         public ActionResult Index()
         {
-            var obra = db.Obra.Include(o => o.Usuario);
+            var obra = db.Obra.Include(o => o.Usuario).Include(o => o.Cliente1).Include(o => o.Departamento);
             return View(obra.ToList());
         }
 
@@ -40,6 +40,8 @@ namespace SGO.Controllers
         public ActionResult Create()
         {
             ViewBag.ModUsuarioID = new SelectList(db.Usuario, "ID", "NombreUsuario");
+            ViewBag.ClienteID = new SelectList(db.Cliente, "ID", "Nombre");
+            ViewBag.DepartamentoID = new SelectList(db.Departamento, "ID", "Descripcion");
             return View();
         }
 
@@ -48,7 +50,7 @@ namespace SGO.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Cliente,Coeficiente,InsFecha,ModUsuarioID,Nombre,Finalizada,ModFecha")] Obra obra)
+        public ActionResult Create([Bind(Include = "ID,Cliente,Coeficiente,InsFecha,ModUsuarioID,Nombre,Finalizada,ModFecha,DepartamentoID,ClienteID")] Obra obra)
         {
             if (ModelState.IsValid)
             {
@@ -58,6 +60,8 @@ namespace SGO.Controllers
             }
 
             ViewBag.ModUsuarioID = new SelectList(db.Usuario, "ID", "NombreUsuario", obra.ModUsuarioID);
+            ViewBag.ClienteID = new SelectList(db.Cliente, "ID", "Nombre", obra.ClienteID);
+            ViewBag.DepartamentoID = new SelectList(db.Departamento, "ID", "Descripcion", obra.DepartamentoID);
             return View(obra);
         }
 
@@ -74,6 +78,8 @@ namespace SGO.Controllers
                 return HttpNotFound();
             }
             ViewBag.ModUsuarioID = new SelectList(db.Usuario, "ID", "NombreUsuario", obra.ModUsuarioID);
+            ViewBag.ClienteID = new SelectList(db.Cliente, "ID", "Nombre", obra.ClienteID);
+            ViewBag.DepartamentoID = new SelectList(db.Departamento, "ID", "Descripcion", obra.DepartamentoID);
             return View(obra);
         }
 
@@ -82,7 +88,7 @@ namespace SGO.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Cliente,Coeficiente,InsFecha,ModUsuarioID,Nombre,Finalizada,ModFecha")] Obra obra)
+        public ActionResult Edit([Bind(Include = "ID,Cliente,Coeficiente,InsFecha,ModUsuarioID,Nombre,Finalizada,ModFecha,DepartamentoID,ClienteID")] Obra obra)
         {
             if (ModelState.IsValid)
             {
@@ -91,6 +97,8 @@ namespace SGO.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ModUsuarioID = new SelectList(db.Usuario, "ID", "NombreUsuario", obra.ModUsuarioID);
+            ViewBag.ClienteID = new SelectList(db.Cliente, "ID", "Nombre", obra.ClienteID);
+            ViewBag.DepartamentoID = new SelectList(db.Departamento, "ID", "Descripcion", obra.DepartamentoID);
             return View(obra);
         }
 

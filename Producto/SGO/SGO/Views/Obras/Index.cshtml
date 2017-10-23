@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Cliente)
+            @Html.DisplayNameFor(model => model.Cliente1.Nombre)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Coeficiente)
@@ -31,6 +31,12 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Usuario.NombreUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente1.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Departamento.Descripcion)
         </th>
         <th></th>
     </tr>
@@ -57,6 +63,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Usuario.NombreUsuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente1.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Departamento.Descripcion)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

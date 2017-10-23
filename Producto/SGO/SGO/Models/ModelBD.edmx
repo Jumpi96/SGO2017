@@ -31,6 +31,7 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="30" />
+          <Property Name="EnGranSanJuan" Type="bit" />
         </EntityType>
         <EntityType Name="DetalleSubItem">
           <Key>
@@ -70,7 +71,6 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Cliente" Type="nvarchar(max)" />
           <Property Name="Coeficiente" Type="float" Nullable="false" />
           <Property Name="InsFecha" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="ModUsuarioID" Type="int" />
@@ -513,7 +513,6 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Cliente" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Coeficiente" Type="Double" Nullable="false" />
           <Property Name="InsFecha" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="ModUsuarioID" Type="Int32" />
@@ -898,6 +897,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Obra" Relationship="Model.FK_Obra_Departamento" FromRole="Departamento" ToRole="Obra" />
+          <Property Name="EnGranSanJuan" Type="Boolean" />
         </EntityType>
         <EntityType Name="TipoCliente">
           <Key>
@@ -999,7 +999,6 @@
                 <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
                 <ScalarProperty Name="DepartamentoID" ColumnName="DepartamentoID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
                 <ScalarProperty Name="Coeficiente" ColumnName="Coeficiente" />
                 <ScalarProperty Name="InsFecha" ColumnName="InsFecha" />
                 <ScalarProperty Name="ModUsuarioID" ColumnName="ModUsuarioID" />
@@ -1112,6 +1111,7 @@
           <EntitySetMapping Name="Departamento">
             <EntityTypeMapping TypeName="Model.Departamento">
               <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="EnGranSanJuan" ColumnName="EnGranSanJuan" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

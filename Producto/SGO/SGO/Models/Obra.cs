@@ -22,7 +22,6 @@ namespace SGO.Models
         }
     
         public int ID { get; set; }
-        public string Cliente { get; set; }
         public double Coeficiente { get; set; }
         public System.DateTime InsFecha { get; set; }
         public Nullable<int> ModUsuarioID { get; set; }
