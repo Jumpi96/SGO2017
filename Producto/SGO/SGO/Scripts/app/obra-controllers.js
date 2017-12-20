@@ -1,5 +1,5 @@
-﻿angular.module('SGOApp', [])
-    .controller('ObraCtrl', function ($scope, $http) {
+﻿var obraApp = angular.module('SGOApp', ["ui.bootstrap"]);
+obraApp.controller('ObraCtrl', function ($scope, $http) {
         $scope.idObra = 0;
         $scope.rubros = ['Rubro 1','Rubro 2','Rubro 3'];
         $scope.subrubros = ['Subrubro 1', 'Subrubro 2', 'Subrubro 3'];

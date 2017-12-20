@@ -46,6 +46,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExcelDataReader, Version=3.2.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.2.0\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.2.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.2.0\lib\net45\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -57,8 +63,12 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.4.4.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -203,10 +213,17 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DetalleSubItemsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\api\ObrasController.cs" />
     <Compile Include="Controllers\ObrasController.cs" />
+    <Compile Include="Controllers\RubroesController.cs" />
+    <Compile Include="Controllers\SubItemDeItemsController.cs" />
+    <Compile Include="Controllers\SubItemsController.cs" />
+    <Compile Include="Controllers\SubRubroesController.cs" />
+    <Compile Include="Controllers\TipoItemsController.cs" />
     <Compile Include="Controllers\UnidadsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -282,6 +299,7 @@
     </Compile>
     <Compile Include="Models\ViewModels\ObraInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ScraperService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -289,7 +307,10 @@
     <Content Include="Content\bootstrap-select.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\select.css" />
+    <Content Include="Content\select.min.css" />
     <Content Include="Content\sgo.css" />
+    <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -305,6 +326,10 @@
       <LastGenOutput>ModelBD.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\obra-controllers.js" />
@@ -328,6 +353,7 @@
     <None Include=".bin\git.cmd" />
     <None Include=".bin\node.cmd" />
     <None Include=".bin\npm.cmd" />
+    <Content Include="Content\select.min.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\defaults-ar_AR.js" />
     <Content Include="Scripts\i18n\defaults-ar_AR.min.js" />
@@ -412,6 +438,9 @@
     <Content Include="Scripts\obra-details.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\select.js" />
+    <Content Include="Scripts\select.min.js" />
+    <Content Include="Views\Obras\ModalRegistrarDetails.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -451,6 +480,42 @@
     <Content Include="Views\Obras\Delete.cshtml" />
     <Content Include="Views\Obras\Edit.cshtml" />
     <Content Include="Views\Obras\Index.cshtml" />
+    <Content Include="Views\TipoItems\Create.cshtml" />
+    <Content Include="Views\TipoItems\Delete.cshtml" />
+    <Content Include="Views\TipoItems\Details.cshtml" />
+    <Content Include="Views\TipoItems\Edit.cshtml" />
+    <Content Include="Views\TipoItems\Index.cshtml" />
+    <Content Include="Views\DetalleSubItems\Create.cshtml" />
+    <Content Include="Views\DetalleSubItems\Delete.cshtml" />
+    <Content Include="Views\DetalleSubItems\Details.cshtml" />
+    <Content Include="Views\DetalleSubItems\Edit.cshtml" />
+    <Content Include="Views\DetalleSubItems\Index.cshtml" />
+    <Content Include="Views\SubItems\Create.cshtml" />
+    <Content Include="Views\SubItems\Delete.cshtml" />
+    <Content Include="Views\SubItems\Details.cshtml" />
+    <Content Include="Views\SubItems\Edit.cshtml" />
+    <Content Include="Views\SubItems\Index.cshtml" />
+    <Content Include="Views\SubItemDeItems\Create.cshtml" />
+    <Content Include="Views\SubItemDeItems\Delete.cshtml" />
+    <Content Include="Views\SubItemDeItems\Details.cshtml" />
+    <Content Include="Views\SubItemDeItems\Edit.cshtml" />
+    <Content Include="Views\SubItemDeItems\Index.cshtml" />
+    <Content Include="Views\Rubroes\Create.cshtml" />
+    <Content Include="Views\Rubroes\Delete.cshtml" />
+    <Content Include="Views\Rubroes\Details.cshtml" />
+    <Content Include="Views\Rubroes\Edit.cshtml" />
+    <Content Include="Views\Rubroes\Index.cshtml" />
+    <Content Include="Views\SubRubroes\Create.cshtml" />
+    <Content Include="Views\SubRubroes\Delete.cshtml" />
+    <Content Include="Views\SubRubroes\Details.cshtml" />
+    <Content Include="Views\SubRubroes\Edit.cshtml" />
+    <Content Include="Views\SubRubroes\Index.cshtml" />
+    <Content Include="Views\Items\Create.cshtml" />
+    <Content Include="Views\Items\Delete.cshtml" />
+    <Content Include="Views\Items\Details.cshtml" />
+    <Content Include="Views\Items\Edit.cshtml" />
+    <Content Include="Views\Items\Index.cshtml" />
+    <Content Include="Scripts\select.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

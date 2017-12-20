@@ -13,16 +13,11 @@
     </div>
     <hr />
     <div class="row">
-        <div class="dropdown col-md-3">
-            <button class="btn btn-default dropdown-toggle" type="button" id="cmbRubro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                {{selectedRubro}}
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="cmbRubro">
-                <li ng-repeat="rubro in rubros"><a ng-click="seleccionarRubro(rubro)">{{rubro}}</a></li>
-            </ul>
-        </div>
-        <div class="dropdown col-md-3">
+        <select class="form-control" ng-model="selectedRubro" ng-options="y for (x, y) in rubros" #t (change)="cargarInfoObra(@Html.ValueFor(model => model.ID))"></select>
+        <select class="form-control" ng-model="selectedSubrubro" ng-options="y for (x, y) in subrubros"></select>
+        <select class="form-control" ng-model="selectedItem" ng-options="y for (x, y) in items"></select>
+        <select class="form-control" ng-model="selectedSubitem" ng-options="y for (x, y) in subitems"></select>
+        <!--<div class="dropdown col-md-3">
             <button class="btn btn-default dropdown-toggle" type="button" id="cmbSubrubro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 {{selectedSubrubro}}
                 <span class="caret"></span>
@@ -48,7 +43,7 @@
             <ul class="dropdown-menu" aria-labelledby="cmbSubItem">
                 <li ng-repeat="subitem in subitems"><a ng-click="seleccionarSubitem(subitem)">{{subitem}}</a></li>
             </ul>
-        </div>
+        </div>-->
     </div>
     <hr />
     <div class="row">
@@ -97,5 +92,6 @@
 @Scripts.Render("~/bundles/angular")
 @section scripts {
     @Scripts.Render("~/Scripts/obra-details.js")
+    @Scripts.Render("~/Scripts/select.min.js")
 }
 <script src="https://d3js.org/d3.v4.min.js"></script>

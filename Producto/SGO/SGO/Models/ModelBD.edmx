@@ -32,6 +32,8 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="30" />
           <Property Name="EnGranSanJuan" Type="bit" />
+          <Property Name="Latitud" Type="float" />
+          <Property Name="Longitud" Type="float" />
         </EntityType>
         <EntityType Name="DetalleSubItem">
           <Key>
@@ -898,6 +900,8 @@
           <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Obra" Relationship="Model.FK_Obra_Departamento" FromRole="Departamento" ToRole="Obra" />
           <Property Name="EnGranSanJuan" Type="Boolean" />
+          <Property Name="Latitud" Type="Double" />
+          <Property Name="Longitud" Type="Double" />
         </EntityType>
         <EntityType Name="TipoCliente">
           <Key>
@@ -1111,6 +1115,8 @@
           <EntitySetMapping Name="Departamento">
             <EntityTypeMapping TypeName="Model.Departamento">
               <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
                 <ScalarProperty Name="EnGranSanJuan" ColumnName="EnGranSanJuan" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="ID" ColumnName="ID" />

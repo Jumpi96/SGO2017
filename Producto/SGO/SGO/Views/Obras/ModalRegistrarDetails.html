@@ -1,0 +1,76 @@
+﻿<div class="modal-header">
+    <h1>Registrar movimiento</h1>
+</div>
+
+<div class="modal-body">
+    <form role="form" class="form-horizontal">
+        <fieldset>
+            <legend>Ítem</legend>
+            <div class="form-group">
+                <label for="rubro" class="col-sm-3 control-label">Rubro</label>
+                <div class="col-sm-9">
+                    <select name="rubro" class="form-control" ng-model="selectedRubro" ng-options="y for (x, y) in rubros" #t (change)="cargarInfoObra(@Html.ValueFor(model => model.ID))"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="subrubro" class="col-sm-3 control-label">Subrubro</label>
+                <div class="col-sm-9">
+                    <select name="subrubro" class="form-control" ng-model="selectedSubrubro" ng-options="y for (x, y) in subrubros"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="item" class="col-sm-3 control-label">Ítem</label>
+                <div class="col-sm-9">
+                    <select name="item" class="form-control" ng-model="selectedItem" ng-options="y for (x, y) in items"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="subitem" class="col-sm-3 control-label">Subítem</label>
+                <div class="col-sm-9">
+                    <select name="subitem" class="form-control" ng-model="selectedSubitem" ng-options="y for (x, y) in subitems"></select>
+                </div>
+            </div>
+        </fieldset>
+
+        <br />
+
+        <fieldset>
+            <legend>Detalles</legend>
+            <div class="form-group">
+                <label for="cantidad" class="col-sm-3 control-label">Cantidad</label>
+                <div class="col-sm-9">
+                    <input type="text" id="cantidad" name="cantidad" class="form-control"
+                           ng-model="nuevoMovimiento.cantidad" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="observaciones" class="col-sm-3 control-label">Observaciones</label>
+                <div class="col-sm-9">
+                    <textarea type="text" id="observaciones" name="observaciones" class="form-control"
+                           ng-model="nuevoMovimiento.observaciones" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="receptores" class="col-sm-3 control-label">Recibe</label>
+                <div class="col-sm-9">
+                    <textarea type="text" id="receptores" name="receptores" class="form-control"
+                              ng-model="nuevoMovimiento.receptor" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fecha" class="col-sm-3 control-label">Fecha</label>
+                
+            </div>
+        </fieldset>
+
+    </form>
+</div>
+
+<div class="modal-footer">
+    <div class="col-sm-offset-3 col-sm-9">
+        <div class="col-sm-offset-3 col-sm-9">
+            <input type="button" class="btn btn-default" value="Cancelars" ng-click="cancelForm()" />
+            <input type="submit" class="btn btn-primary" value="Registrar" ng-click="submitForm()" />
+        </div>
+    </div>
+</div>  

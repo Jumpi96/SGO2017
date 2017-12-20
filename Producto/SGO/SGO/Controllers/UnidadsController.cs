@@ -114,5 +114,22 @@ namespace SGO.Controllers
         {
             return db.Unidad.Count(e => e.ID == id) > 0;
         }
+
+        public Unidad UnidadByNombre(Entities context, string nombre)
+        {
+            return context.Unidad.SingleOrDefault(m => m.Nombre.Equals(nombre));
+        }
+
+        public Unidad Insertar(Entities context, Unidad unidad)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Unidad.Add(unidad);
+                context.SaveChanges();
+                return unidad;
+            }
+            else
+                return null;
+        }
     }
 }

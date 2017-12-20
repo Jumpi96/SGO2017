@@ -1,0 +1,50 @@
+﻿@model SGO.Models.DetalleSubItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DetalleSubItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioUnitario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecioUnitario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Obra.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Obra.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubItemDeItem.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubItemDeItem.ID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

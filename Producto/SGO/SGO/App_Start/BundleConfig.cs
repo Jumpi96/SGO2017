@@ -37,6 +37,11 @@ namespace SGO
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                       "~/Scripts/angular.js",
                       "~/Scripts/app/obra-controllers.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angular-ui").Include(
+                      "~/Scripts/angular-ui/ui-bootstrap-tpls.js"
+                ));
+
         }
     }
 }

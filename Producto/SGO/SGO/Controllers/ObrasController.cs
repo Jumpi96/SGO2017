@@ -36,6 +36,17 @@ namespace SGO.Controllers
             return View(obra);
         }
 
+        // GET: Obras
+        public ActionResult Procesar()
+        {
+            Usuario usuario = new Usuario();
+            ScraperService s = new ScraperService(usuario);
+            s.ProcesarDocumento("D:/Code/SGO/Proyecto/Archivos/Editando1.xls", 3, 4);
+
+            //return View(await _context.Obra.ToListAsync());
+            return View();
+        }
+
         // GET: Obras/Create
         public ActionResult Create()
         {
@@ -136,5 +147,19 @@ namespace SGO.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public Obra Insertar(Entities context, Obra obra)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Obra.Add(obra);
+                context.SaveChanges();
+                return obra;
+            }
+            else
+                return null;
+        }
+
+        
     }
 }

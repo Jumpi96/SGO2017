@@ -23,6 +23,8 @@ namespace SGO.Models
         public int ID { get; set; }
         public string Descripcion { get; set; }
         public Nullable<bool> EnGranSanJuan { get; set; }
+        public Nullable<double> Latitud { get; set; }
+        public Nullable<double> Longitud { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Obra> Obra { get; set; }
