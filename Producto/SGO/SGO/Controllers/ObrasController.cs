@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SGO.Models;
+using SGO.Models.ViewModels;
 
 namespace SGO.Controllers
 {
@@ -21,19 +22,35 @@ namespace SGO.Controllers
             return View(obra.ToList());
         }
 
-        // GET: Obras/Details/5
-        public ActionResult Details(int? id)
+
+
+        // GET: Obras/Details/5/0/0/0/0/1
+        public ActionResult Details(int id, int rubro, int subrubro, int item, int subitem, bool enPesos)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Obra obra = db.Obra.Find(id);
             if (obra == null)
             {
                 return HttpNotFound();
             }
-            return View(obra);
+            ActualizarIdsDeCombos(ref rubro, ref subrubro, ref item, ref subitem);
+            var obraInfoVM = new ObraInfoViewModel
+            {
+                ObraID = id,
+                NombreObra = obra.Nombre,
+                SelectedEnPesos = true,
+                Rubros = GetRubros(id),
+                Subrubros = GetSubRubros(id, rubro),
+                Items = GetItems(id, rubro, subrubro),
+                Subitems = GetSubItems(id, rubro, subrubro, item),
+                Movimientos = GetMovimientos(id,rubro,subrubro,item,subitem,enPesos).ToString(),
+                Entregado = 100,
+                AEntregar = 20,
+                SelectedItemID = item,
+                SelectedRubroID = rubro,
+                SelectedSubItemID = subitem,
+                SelectedSubRubroID = subrubro
+            };
+            return View(obraInfoVM);
         }
 
         // GET: Obras
@@ -160,6 +177,120 @@ namespace SGO.Controllers
                 return null;
         }
 
-        
+        private List<SelectListItem> GetRubros(int obra)
+        {
+            List<SelectListItem> rubros =            
+                (from R in db.Rubro
+                 join SR in db.SubRubro on R.ID equals SR.RubroID
+                 join I in db.Item on SR.ID equals I.SubRubroID
+                 join S in db.SubItemDeItem on I.ID equals S.ItemID
+                 join DSI in db.DetalleSubItem on S.ID equals DSI.SubItemDeItemID
+                 where DSI.ObraID == obra
+                 select R
+                 ).Select(r => new SelectListItem()
+                            {
+                                Value = r.ID.ToString(),
+                                Text = r.Nombre
+                            })
+                  .Distinct().ToList();
+            if (rubros.Count>1)
+                rubros.Insert(0, new SelectListItem() { Value = "0", Text = "--Todos los rubros--" });
+            return rubros;
+        }
+
+        private List<SelectListItem> GetSubRubros(int obra, int rubro)
+        {
+            List<SelectListItem> subrubros =
+                (from R in db.Rubro
+                 join SR in db.SubRubro on R.ID equals SR.RubroID
+                 join I in db.Item on SR.ID equals I.SubRubroID
+                 join S in db.SubItemDeItem on I.ID equals S.ItemID
+                 join DSI in db.DetalleSubItem on S.ID equals DSI.SubItemDeItemID
+                 where DSI.ObraID == obra && (R.ID == rubro || rubro == 0)
+                 select SR
+                 ).Select(r => new SelectListItem()
+                            {
+                                Value = r.ID.ToString(),
+                                Text = r.Nombre
+                            })
+                     .Distinct().ToList();
+            if (subrubros.Count > 1)
+                subrubros.Insert(0, new SelectListItem() { Value = "0", Text = "--Todos los subrubros--" });
+            return subrubros;
+        }
+
+        private List<SelectListItem> GetItems(int obra, int rubro, int subrubro)
+        {
+            List<SelectListItem> items =
+                (from R in db.Rubro
+                 join SR in db.SubRubro on R.ID equals SR.RubroID
+                 join I in db.Item on SR.ID equals I.SubRubroID
+                 join S in db.SubItemDeItem on I.ID equals S.ItemID
+                 join DSI in db.DetalleSubItem on S.ID equals DSI.SubItemDeItemID
+                 where DSI.ObraID == obra && (R.ID == rubro || rubro == 0)
+                                          && (SR.ID == subrubro || subrubro == 0)
+                 select I
+                 ).Select(r => new SelectListItem()
+                 {
+                     Value = r.ID.ToString(),
+                     Text = r.Nombre
+                 })
+                     .Distinct().ToList();
+            if (items.Count > 1)
+                items.Insert(0, new SelectListItem() { Value = "0", Text = "--Todos los ítems--" });
+            return items;
+        }
+
+        private List<SelectListItem> GetSubItems(int obra, int rubro, int subrubro, int item)
+        {
+            List<SelectListItem> subitems = 
+                (from R in db.Rubro
+                 join SR in db.SubRubro on R.ID equals SR.RubroID
+                 join I in db.Item on SR.ID equals I.SubRubroID
+                 join S in db.SubItemDeItem on I.ID equals S.ItemID
+                 join DSI in db.DetalleSubItem on S.ID equals DSI.SubItemDeItemID
+                 where DSI.ObraID == obra && (R.ID == rubro || rubro == 0)
+                                          && (SR.ID == subrubro || subrubro == 0)
+                                          && (I.ID == item || item == 0)
+                 select S.SubItem
+                 ).Select(r => new SelectListItem()
+                 {
+                     Value = r.ID.ToString(),
+                     Text = r.Nombre
+                 })
+                    .Distinct().ToList();
+            if (subitems.Count > 1)
+                subitems.Insert(0, new SelectListItem() { Value = "0", Text = "--Todos los subítems--" });
+            return subitems;
+        }
+
+        private int GetMovimientos(int obra, int rubro, int subrubro, int item, int subitem, bool enPesos)
+        {
+            return
+                (from M in db.Movimiento
+                 join S in db.SubItemDeItem on M.SubItemID equals S.SubItemID
+                 where M.ObraID == obra && (S.SubItemID == subitem || subitem == 0)
+                                         && (S.ItemID == item || item == 0)
+                                         && (S.Item.SubRubroID == subrubro || subrubro == 0)
+                                         && (S.Item.SubRubro.RubroID == rubro || rubro == 0)
+                 select M.ID).Distinct().Count();
+
+        }
+        private void ActualizarIdsDeCombos(ref int rubro, ref int subrubro, ref int item, ref int subitem)
+        {
+            if (item != 0)
+            {
+                int idItem = item;
+                Item itemSeleccionado = db.Item.First(i => i.ID == idItem);
+                subrubro = itemSeleccionado.SubRubro.ID;
+                rubro = itemSeleccionado.SubRubro.Rubro.ID;
+            }
+            else if (subrubro != 0)
+            {
+                int idSubrubro = subrubro;
+                SubRubro subrubroSeleccionado = db.SubRubro.First(i => i.ID == idSubrubro);
+                rubro = subrubroSeleccionado.Rubro.ID;
+            }
+        }
     }
 }

@@ -1,3 +1,7 @@
+
+
+
+
 var options = {
     offText: "%",
     onText: "$",
@@ -5,7 +9,7 @@ var options = {
     offColor: 'warning',
     onColor: 'danger'
 };
-$("[name='chkUnidad']").bootstrapSwitch(options);
+$("#ckbEnPesos").bootstrapSwitch(options);
 
 var CrearGraficoBarras = function (data) {
     d3.select(".graficoBarras").selectAll("svg").remove();

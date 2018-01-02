@@ -3,33 +3,37 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace SGO.Models.ViewModels
 {
     public class ObraInfoViewModel
     {
-        [JsonProperty(PropertyName="rubros")]
-        public Dictionary<int,String> rubros { get; set; }
+        public int ObraID { get; set; }
+        public String NombreObra { get; set; }
 
-        [JsonProperty(PropertyName = "subrubros")]
-        public Dictionary<int, String> subrubros { get; set; }
+        public bool SelectedEnPesos { get; set; }
 
-        [JsonProperty(PropertyName = "items")]
-        public Dictionary<int, String> items { get; set; }
+        public int SelectedRubroID { get; set; }
+        public int SelectedSubRubroID { get; set; }
+        public int SelectedItemID { get; set; }
+        public int SelectedSubItemID { get; set; }
 
-        [JsonProperty(PropertyName = "subitems")]
-        public Dictionary<int, String> subitems { get; set; }
+        public IEnumerable<SelectListItem> Rubros { get; set; }
 
-        [JsonProperty(PropertyName = "unidad")]
-        public String unidad { get; set; }
+        public IEnumerable<SelectListItem> Subrubros { get; set; }
 
-        [JsonProperty(PropertyName = "entregado")]
-        public double entregado { get; set; }
+        public IEnumerable<SelectListItem> Items { get; set; }
 
-        [JsonProperty(PropertyName = "aEntregar")]
-        public double aEntregar { get; set; }
+        public IEnumerable<SelectListItem> Subitems { get; set; }
 
-        [JsonProperty(PropertyName = "movimientos")]
-        public String movimientos { get; set; }
+        //[JsonProperty(PropertyName = "entregado")]
+        public double Entregado { get; set; }
+
+        //[JsonProperty(PropertyName = "aEntregar")]
+        public double AEntregar { get; set; }
+
+        //[JsonProperty(PropertyName = "movimientos")]
+        public String Movimientos { get; set; }
     }
 }

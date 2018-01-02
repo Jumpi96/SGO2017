@@ -1,55 +1,50 @@
-﻿@model SGO.Models.Obra
+﻿@model SGO.Models.ViewModels.ObraInfoViewModel
 
 @{
     ViewBag.Title = "Details";
 }
-<div id="bodyContainer" ng-app="SGOApp" ng-controller="ObraCtrl" ng-init="cargarInfoObra(@Html.ValueFor(model => model.ID))">
+<div id="bodyContainer">
     <div class="row" id="titulo-obra">
-        <h3 class="col-md-8">@Html.DisplayFor(model => model.Nombre)</h3>
+        <h3 class="col-md-8">@Html.DisplayFor(model => model.NombreObra)</h3>
         <div class="btn-group col-md-4">
-            <button ng-click="cargarInfoObra(@Html.ValueFor(model => model.ID))" class="btn btn-warning col-md-6">Limpiar filtros</button>
+            <button id="btnLimpiar" class="btn btn-warning col-md-6" onclick="window.location.reload()">Limpiar filtros</button>
             <button class="btn btn-warning col-md-6">Modificar obra</button>
         </div>
     </div>
     <hr />
     <div class="row">
-        <select class="form-control" ng-model="selectedRubro" ng-options="y for (x, y) in rubros" #t (change)="cargarInfoObra(@Html.ValueFor(model => model.ID))"></select>
-        <select class="form-control" ng-model="selectedSubrubro" ng-options="y for (x, y) in subrubros"></select>
-        <select class="form-control" ng-model="selectedItem" ng-options="y for (x, y) in items"></select>
-        <select class="form-control" ng-model="selectedSubitem" ng-options="y for (x, y) in subitems"></select>
-        <!--<div class="dropdown col-md-3">
-            <button class="btn btn-default dropdown-toggle" type="button" id="cmbSubrubro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                {{selectedSubrubro}}
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="cmbSubrubro">
-                <li ng-repeat="subrubro in subrubros"><a ng-click="seleccionarSubrubro(subrubro)">{{subrubro}}</a></li>
-            </ul>
+        <div class="col-md-3">
+            @Html.DropDownListFor(m => m.SelectedRubroID, Model.Rubros,
+                new
+                {
+                    id = "ddlRubro",
+                    @class = "form-control",
+                    onchange = "window.location.href = window.location.origin + \"" +
+                                                "/Obras/Details/" + Model.ObraID +
+                                                "/\" + GetRubroSeleccionado() + \"" +
+                                                "/0/0/0/true" + "\""
+                })
         </div>
-        <div class="dropdown col-md-3">
-            <button class="btn btn-default dropdown-toggle" type="button" id="cmbItem" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                {{selectedItem}}
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="cmbItem">
-                <li ng-repeat="item in items"><a ng-click="seleccionarItem(item)">{{item}}</a></li>
-            </ul>
+        <script>
+            function GetRubroSeleccionado(){
+                return $("#ddlRubro").val();
+            };
+        </script>
+        <div class="col-md-3">
+            @Html.DropDownListFor(m => m.SelectedSubRubroID, Model.Subrubros, new { @class = "form-control" })
         </div>
-        <div class="dropdown col-md-3">
-            <button class="btn btn-default dropdown-togglen" type="button" id="cmbSubitem" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                {{selectedSubitem}}
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="cmbSubItem">
-                <li ng-repeat="subitem in subitems"><a ng-click="seleccionarSubitem(subitem)">{{subitem}}</a></li>
-            </ul>
-        </div>-->
+        <div class="col-md-3">
+            @Html.DropDownListFor(m => m.SelectedItemID, Model.Items, new { @class = "form-control" })
+        </div>
+        <div class="col-md-3">
+            @Html.DropDownListFor(m => m.SelectedSubItemID, Model.Subitems, new { @class = "form-control" })
+        </div>
     </div>
     <hr />
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-4">
-            <input type="checkbox" name="chkUnidad" ng-checked="selectedEnPesos" checked="true">
+            @Html.CheckBoxFor(x => x.SelectedEnPesos, new { id = "ckbEnPesos" })
         </div>
         <div class="col-md-2"></div>
         <button class="btn btn-danger col-md-2">Registrar pago</button>
@@ -58,25 +53,25 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-5">
-            <div class="graficoBarras" ng-show="entregadoGrafico>=aEntregarGrafico"></div>
-            <div id="graficoTorta" ng-show="entregadoGrafico<aEntregarGrafico"></div>
+            <div class="graficoBarras"></div>
+            <div id="graficoTorta"></div>
         </div>
         <div class="col-md-6">
             <dl class="dl-horizontal">
                 <dt>
-                    {{aEntregar}}
+                    @Html.DisplayFor(model => model.AEntregar)
                 </dt>
                 <dd>
                     Cantidad a entregar
                 </dd>
                 <dt>
-                    {{entregado}}
+                    @Html.DisplayFor(model => model.Entregado)
                 </dt>
                 <dd>
                     Cantidad entregada
                 </dd>
                 <dt>
-                    {{movimientos}}
+                    @Html.DisplayFor(model => model.Movimientos)
                 </dt>
                 <dd>
                     Número de movimientos
@@ -88,10 +83,8 @@
     <div>
         <button asp-action="Index" class="btn">Volver</button>
     </div>
-</div>
-@Scripts.Render("~/bundles/angular")
+</div> 
 @section scripts {
     @Scripts.Render("~/Scripts/obra-details.js")
-    @Scripts.Render("~/Scripts/select.min.js")
 }
 <script src="https://d3js.org/d3.v4.min.js"></script>
